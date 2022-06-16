@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
@@ -17,11 +19,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(s*)css$/i,
+                test: /\.s?css$/i,
                 // i - ignore case in regex
                 use: [
+                    MiniCssExtractPlugin.loader,
                     // creates style from JS strings
-                    'style-loader',
+                    // 'style-loader',
                     // translates CSS into CommonJS (allows to import in JS)
                     'css-loader',
                     // tranpiles SASS to CSS
@@ -47,6 +50,13 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
     plugins: [
-        new HtmlWebpackPlugin({ title: 'Super app!' })
-    ]
+        new HtmlWebpackPlugin({ title: 'Super app!' }),
+        new MiniCssExtractPlugin()
+    ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
+    }
 };
