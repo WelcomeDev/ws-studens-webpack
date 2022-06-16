@@ -1,10 +1,15 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './src/js/index.js',
+    entry: {
+        index: './src/js/index.js',
+        form: './src/js/form.js'
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[hash][id].js',
         path: path.resolve(__dirname, 'build'),
+        clean: true
     },
     module: {
         rules: [
@@ -14,5 +19,8 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({})
+    ]
 };
