@@ -8,8 +8,7 @@ module.exports = {
     entry: {
         index: './src/js/index.js',
         form: './src/js/form.js',
-        comment: './src/ts/comment.ts',
-        images: './src/ts/addImages.ts'
+        react: './src/react/react.tsx',
     },
     output: {
         filename: '[chunkhash].js',
@@ -32,17 +31,21 @@ module.exports = {
                 ]
             },
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node-modules/
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
+                test: /\.(t|j)sx$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['@babel/preset-env', {
+                                    "targets": "defaults"
+                                }],
+                                ["@babel/preset-react", { "runtime": "automatic" }],
+                                "@babel/preset-typescript"
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -50,8 +53,8 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
     },
     plugins: [
-        new HtmlWebpackPlugin({ title: 'Super app!' }),
-        new MiniCssExtractPlugin()
+        new HtmlWebpackPlugin({ title: 'Super app!', template: './src/react-template.html' }),
+        new MiniCssExtractPlugin({ filename: '[chunkhash].css' })
     ],
     optimization: {
         minimize: true,

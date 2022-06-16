@@ -1,0 +1,19 @@
+.hello {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    &__header {
+        font-size: 36px;
+    }
+
+    &__text {
+        font-size: 12px;
+        color: blue;
+    }
+}
