@@ -15,9 +15,16 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/i,
+                test: /\.(s*)css$/i,
                 // i - ignore case in regex
-                use: ['style-loader', 'css-loader']
+                use: [
+                    // creates style from JS strings
+                    'style-loader',
+                    // translates CSS into CommonJS (allows to import in JS)
+                    'css-loader',
+                    // tranpiles SASS to CSS
+                    'sass-loader'
+                ]
             }
         ]
     },

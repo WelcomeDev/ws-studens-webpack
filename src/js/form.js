@@ -1,3 +1,5 @@
+import '../css/forms.scss';
+
 const NAME_PATTERN = /^[A-Z][a-z]{2,}$/;
 const AGE_PATTERN = /^[1-6][0-9]$/;
 
@@ -23,6 +25,7 @@ const fields = {
 
 window.addEventListener('load', () => {
     const form = document.createElement('form');
+    form.setAttribute('class', 'test-form ');
 
     const inputs = Object.keys(fields)
         .forEach(key => {
@@ -31,6 +34,7 @@ window.addEventListener('load', () => {
             const labelElement = document.createElement('label');
             const labelText = document.createElement('p');
             labelText.innerText = configObj.label;
+            labelElement.setAttribute('class', 'form-input');
 
             labelElement.appendChild(labelText);
             const inputElement = document.createElement('input');
@@ -54,6 +58,8 @@ window.addEventListener('load', () => {
     const submitButton = document.createElement('button');
     submitButton.type = 'submit';
     submitButton.innerText = 'Submit';
+    submitButton.setAttribute('class', 'submit');
+
     form.appendChild(submitButton);
 
     document.body.append(form);

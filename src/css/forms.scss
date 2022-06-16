@@ -1,0 +1,35 @@
+.test-form {
+    display: flex;
+    row-gap: 10px;
+    flex-direction: column;
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-input {
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+
+        input {
+            padding: 4px;
+            border-radius: 5px;
+            width: 150px;
+        }
+    }
+
+    .submit {
+        display: block;
+        width: 150px;
+        height: 46px;
+        border-radius: 10px;
+        background-color: lightblue;
+        transition: 0.25s ease-in-out;
+
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
+}
