@@ -20,6 +20,7 @@ window.addEventListener('load', () => {
     setInterval(
         () => {
             nowTime.innerText = `Now is: ${moment().format('HH:mm:ss')}`;
+            
             const timeLeft = DEADLINE.diff(moment(), 'hours', true);
             const timeLeftStr = `${timeLeft.toFixed(0)}:${(timeLeft % 1 * 60).toFixed(0)}`;
             toDeadline.innerText = `It's ${timeLeftStr} left`;

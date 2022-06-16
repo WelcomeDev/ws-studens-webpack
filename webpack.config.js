@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+    mode: 'development',
     entry: {
         index: './src/js/index.js',
         form: './src/js/form.js'
@@ -21,6 +22,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({})
+        new HtmlWebpackPlugin({ title: 'Super app!' })
     ]
 };
