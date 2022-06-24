@@ -1,9 +1,27 @@
 @import "src/styles/mixins";
 
-.carousel-list {
-  @include center-row-flex(20px);
+.carousel {
+  position: relative;
+  max-width: inherit;
+
+  &-list {
+    position: relative;
+    @include center-row-flex(20px);
+    overflow-x: hidden;
+    padding: 10px 20px;
+  }
 
   &__control {
+    position: absolute;
+    top: calc(50% - 20px);
+    $outside-shift: -30px;
 
+    &--left {
+      left: $outside-shift;
+    }
+
+    &--right {
+      right: $outside-shift;
+    }
   }
 }

@@ -1,5 +1,6 @@
 @import "styles/colors";
 @import "styles/variables";
+@import "styles/mixins";
 
 body {
   background-color: $bg-1;
@@ -7,12 +8,10 @@ body {
 }
 
 .app-wrapper {
+  @include center-row-flex();
   width: 100%;
   height: 100%;
 
-  max-width: $laptop-screen-width;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: $laptop-carousel-width;
   margin: 0 auto;
 }
