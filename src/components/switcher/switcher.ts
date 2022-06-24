@@ -1,4 +1,5 @@
 import './switcher.scss';
+import { getInlineSvg } from '../../utils/getInlineSvg';
 
 export interface SwitcherProps {
     // агаааа, константы - тоже тип в JS, поэтому можно быстро создавать такие "типо-енумы". Для чего-то глобального не стоит это использовать
@@ -21,11 +22,11 @@ export function switcher(props: SwitcherProps) {
     switcherElement.classList.add(`switcher--${direction}`);
     switcherElement.addEventListener('click', onClick);
 
-    import('/src/assets/chevron-up.svg').then(svg => {
-        const svgElement = new DOMParser().parseFromString(svg.default, 'image/svg+xml').documentElement;
-        svgElement.classList.add('switcher__chevron');
-        switcherElement.appendChild(svgElement);
-    });
+    getInlineSvg('chevron-up.svg')
+        .then(inlineSvg => {
+            inlineSvg.classList.add('switcher__chevron');
+            switcherElement.appendChild(inlineSvg);
+        });
 
     return switcherElement;
 }

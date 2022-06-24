@@ -1,0 +1,9 @@
+@import "src/styles/mixins";
+
+.carousel-list {
+  @include center-row-flex(20px);
+
+  &__control {
+
+  }
+}

@@ -2,43 +2,43 @@
   {
     "title": "Architects",
     "description": "Metalcore",
-    "imgSource": "architects.png",
+    "imgSrc": "architects.png",
     "link": "https://music.yandex.ru/artist/701626"
   },
   {
     "title": "Dance with the dead",
     "description": "electronic, dance",
-    "imgSource": "dance_with_the_dead.png",
+    "imgSrc": "dance_with_the_dead.png",
     "link": "https://music.yandex.ru/artist/2436799"
   },
   {
     "title": "Emigrate",
     "description": "industrial",
-    "imgSource": "emigrate.png",
+    "imgSrc": "emigrate.png",
     "link": "https://music.yandex.ru/artist/819526"
   },
   {
     "title": "Love & Death",
     "description": "Nu metal",
-    "imgSource": "love_and_death.png",
+    "imgSrc": "love_and_death.png",
     "link": "https://music.yandex.ru/artist/749175"
   },
   {
     "title": "Motionless in white",
     "description": "alternative metal",
-    "imgSource": "motionless_in_white.png",
+    "imgSrc": "motionless_in_white.png",
     "link": "https://music.yandex.ru/artist/81650"
   },
   {
     "title": "Nothing more",
     "description": "worldwide rock, alternative",
-    "imgSource": "nothing_more.png",
+    "imgSrc": "nothing_more.png",
     "link": "https://music.yandex.ru/artist/2827799"
   },
   {
     "title": "Set it off",
     "description": "alternative, worldwide rock, pop",
-    "imgSource": "set_it_off.png",
+    "imgSrc": "set_it_off.png",
     "link": "https://music.yandex.ru/artist/242377"
   }
 ]

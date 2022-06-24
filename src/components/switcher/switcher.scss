@@ -3,7 +3,7 @@
 @import "src/styles/mixins";
 
 .switcher {
-  @include center-flex();
+  @include center-row-flex();
   justify-content: center;
 
   width: 40px;
@@ -13,7 +13,6 @@
   border: 1px solid $separator-1;
   box-shadow: $default-box-shadow;
   transition: transform $default-transition;
-  transform: scale(1);
 
   &__chevron {
     width: 24px;
@@ -23,7 +22,7 @@
   }
 
   &:hover {
-    transform: scale(1.25);
+    transform: $default-scale;
 
     .switcher__chevron {
       opacity: 1;

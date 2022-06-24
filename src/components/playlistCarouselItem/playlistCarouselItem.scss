@@ -1,0 +1,109 @@
+@import "src/styles/mixins";
+@import "src/styles/colors";
+@import "src/styles/fonts";
+@import "src/styles/variables";
+
+.carousel-item {
+  @include column-flex(10px);
+  width: 200px;
+  height: auto;
+  padding: 10px;
+  border-radius: 5px;
+  transition: border-color $default-transition;
+  box-sizing: content-box;
+  cursor: pointer;
+
+  &:hover {
+    // в отличии от border не занимает места. таким образом, не дергается контент
+    outline: 2px solid $accent-1;
+
+    .carousel-item__description-title {
+      color: $accent-1;
+    }
+
+    .cover-control--side {
+      opacity: 1;
+      background-color: $bg-1;
+
+      .icon {
+        stroke: $white;
+      }
+    }
+  }
+
+  &__cover-wrapper {
+    position: relative;
+    border-radius: inherit;
+  }
+
+  &__cover {
+    width: 200px;
+    height: 200px;
+    border-radius: inherit;
+  }
+
+  &__cover-controls {
+    @include center-row-flex(6px);
+    justify-content: center;
+    position: absolute;
+    top: calc(50% - 20px);
+    left: 0;
+    right: 0;
+
+    .cover-control {
+      @include center-row-flex();
+      justify-content: center;
+      border-radius: 50%;
+      transition: transform $default-transition;
+      will-change: width, height;
+
+      &:hover {
+        transform: $small-scale;
+      }
+
+      &--side {
+        width: 40px;
+        height: 40px;
+        opacity: 0;
+        background-color: $bg-2;
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          stroke: $separator-1;
+        }
+      }
+
+      &--play {
+        width: 50px;
+        height: 50px;
+
+        .icon {
+          width: inherit;
+          height: inherit;
+
+          .circle {
+            fill: $accent-1;
+          }
+
+          .triangle {
+            fill: $bg-2;
+          }
+        }
+      }
+    }
+  }
+
+  &__description {
+    @include column-flex(5px);
+
+    &-title {
+      @extend .title-1;
+    }
+
+    &-annotation {
+      @extend .description-1;
+      color: $text-2;
+    }
+  }
+}
