@@ -1,0 +1,44 @@
+@import "src/styles/colors";
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.switcher {
+  @include center-flex();
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: $bg-2;
+  border: 1px solid $separator-1;
+  box-shadow: $default-box-shadow;
+  transition: transform $default-transition;
+  transform: scale(1);
+
+  &__chevron {
+    width: 24px;
+    height: 24px;
+    stroke: $separator-2;
+    opacity: 0.8;
+  }
+
+  &:hover {
+    transform: scale(1.25);
+
+    .switcher__chevron {
+      opacity: 1;
+    }
+  }
+
+  &--left {
+    .switcher__chevron {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &--right {
+    .switcher__chevron {
+      transform: rotate(90deg);
+    }
+  }
+}
