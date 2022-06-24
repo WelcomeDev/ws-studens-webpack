@@ -20,6 +20,7 @@ export function playlistCarouselItem(playlist: Playlist) {
 
     const controls = getControls();
     const coverWrapper = $('<div>').addClass('carousel-item__cover-wrapper')
+                                   .append($('<div class="carousel-item__cover-shadow">'))
                                    .append(imageElement)
                                    .append($('<div>').addClass('carousel-item__cover-controls')
                                                      .append(controls));

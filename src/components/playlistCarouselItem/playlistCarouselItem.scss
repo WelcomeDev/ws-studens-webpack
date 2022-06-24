@@ -23,11 +23,10 @@
 
     .cover-control--side {
       opacity: 1;
-      background-color: $bg-1;
+    }
 
-      .icon {
-        stroke: $white;
-      }
+    .carousel-item__cover-shadow {
+      opacity: 1;
     }
   }
 
@@ -42,6 +41,18 @@
     border-radius: inherit;
   }
 
+  &__cover-shadow {
+    position: absolute;
+    // лесенка :D
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity $fast-transition;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
   &__cover-controls {
     @include center-row-flex(6px);
     justify-content: center;
@@ -49,6 +60,7 @@
     top: calc(50% - 20px);
     left: 0;
     right: 0;
+    z-index: 2;
 
     .cover-control {
       @include center-row-flex();
@@ -64,6 +76,7 @@
       &--side {
         width: 40px;
         height: 40px;
+        transition: transform $default-transition, opacity $fast-transition;
         opacity: 0;
         background-color: $bg-2;
 
@@ -71,6 +84,14 @@
           width: 24px;
           height: 24px;
           stroke: $separator-1;
+        }
+
+        &:hover {
+          background-color: $bg-1;
+
+          .icon {
+            stroke: $white;
+          }
         }
       }
 
