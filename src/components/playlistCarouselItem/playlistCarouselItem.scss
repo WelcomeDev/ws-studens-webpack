@@ -119,8 +119,13 @@
   &__description {
     @include column-flex(5px);
 
+    &-index {
+      color: $accent-1;
+    }
+
     &-title {
       @extend .title-1;
+      @include center-row-flex(4px);
     }
 
     &-annotation {

@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 $gap-number: 20;
 $item-width-number: 200;
 $item-side-padding-number: 10;
@@ -7,7 +9,8 @@ $carousel-items-gap: #{$gap-number}px;
 $carousel-items-side-padding: #{$item-side-padding-number}px;
 
 :export {
-  carouselItemWidth: $item-width-number;
+  // скрываем детали реализации, что у нас contentBox
+  carouselItemWidth: $item-width-number + 2*$item-side-padding-number;
   carouselItemsGap: $gap-number;
-  carouselItemSidePadding: $item-side-padding-number;
+  carouselWidth: $laptop-carousel-width;
 }

@@ -7,12 +7,16 @@ import { default as carouselCssKnowledge } from '../carouselVariables.module.scs
 import { translateX } from '../../utils/styleUtils';
 
 // экспортируется как string, надо быть аккуратным
+/**
+ * Сдвигаем на размер элемента ширина + gap
+ */
 const shiftSize = Number(carouselCssKnowledge.carouselItemWidth)
-    + Number(carouselCssKnowledge.carouselItemsGap)
-    + 2 * Number(carouselCssKnowledge.carouselItemSidePadding);
+    + Number(carouselCssKnowledge.carouselItemsGap);
 
-console.log(shiftSize);
+const displayedAmount = Math.floor(carouselCssKnowledge.carouselWidth / shiftSize);
+console.log('displayedAmount', displayedAmount);
 
+// todo: remake jqery to $('')
 export function playlistCarousel(items: Playlist[]) {
     let carouselShift = 0;
 
@@ -21,6 +25,36 @@ export function playlistCarousel(items: Playlist[]) {
         return carouselShift;
     }
 
+    /**
+     * Работаем в кольце. Индекс принадлежит, если меньше остатка или если больше сдвига
+     * На первый аргумент все равно, важен только индекс
+     * @param value
+     */
+    function isInForwardRing(_: any, index: number) {
+        const shiftAbs = Math.abs(carouselShift);
+        const minIndexInRing = shiftAbs;
+        let maxIndexInRing = shiftAbs + displayedAmount - 1;
+
+        console.log('index', index, 'minIndexInRing', maxIndexInRing % items.length, 'maxIndexInRing', displayedAmount - shiftAbs);
+        // is in forward ring
+        if (carouselShift < 0)
+            return maxIndexInRing < items.length
+                ? minIndexInRing <= index && index <= maxIndexInRing
+                : index >= minIndexInRing;
+            // if (maxIndexInRing < items.length)
+            //     return minIndexInRing <= index && index <= maxIndexInRing;
+            // if (carouselShift < 0)
+        //     return index >= minIndexInRing;
+        else
+            // index > maxIndexInRing % items.length ||
+            return index < displayedAmount - shiftAbs;
+    }
+
+    function notInForwardRing(_: any, index: number) {
+        return !isInForwardRing(_, index);
+    }
+
+    // как и в Java, если функция принимает тот же набор параметров, можно не сопоставлять их явно
     const playlistItems = items.map(playlistCarouselItem);
     const playlists = $('<ul>').addClass('carousel-list')
                                .append(playlistItems);
@@ -36,28 +70,27 @@ export function playlistCarousel(items: Playlist[]) {
                                       .append(leftSwitcher)
                                       .append(rightSwitcher);
 
-    const carouselSize = shiftSize * items.length;
+    function turn(direction: 'left' | 'right') {
+        const directionSign = direction === 'left' ? 1 : -1;
+        const forwardShift = setCarouselShift(carouselShift - directionSign) * shiftSize;
+        const backwardsShift = directionSign * shiftSize * (items.length + directionSign * carouselShift);
+
+        playlistItems.filter(isInForwardRing)
+                     .forEach(playlist => playlist.css(translateX(forwardShift)));
+
+        playlistItems.filter(isInForwardRing)
+                     .forEach((element) => console.log('index in ring', element.attr('data-index')));
+
+        playlistItems.filter(notInForwardRing)
+                     .forEach(playlist => playlist.css(translateX(backwardsShift)));
+    }
 
     function turnLeft() {
-        const forwardShift = setCarouselShift(carouselShift - 1) * shiftSize;
-        const backwardsShift = carouselSize + carouselShift * shiftSize;
-        console.log('left', carouselShift);
-        // playlists.css(translateX(value));
-
-        playlistItems.slice(0, Math.abs(carouselShift))
-                     .forEach(playlist => playlist.css(translateX(backwardsShift)));
-        playlistItems.slice(Math.abs(carouselShift), items.length)
-                     .forEach(playlist => playlist.css(translateX(forwardShift)));
-        // .forEach(playlist => playlist.css(translateX(value)));
+        turn('left');
     }
 
     function turnRight() {
-        const value = setCarouselShift(carouselShift + 1) * shiftSize;
-        // playlists.css(translateX(value));
-        console.log('shifting right', carouselShift);
-        playlistItems.slice(carouselShift)
-                     .forEach(playlist => playlist.css(translateX(carouselSize)));
-        // .forEach(playlist => playlist.css(translateX(value)));
+        turn('right');
     }
 
     // возвращаем htmlElement, что делается вот таким интересным способом

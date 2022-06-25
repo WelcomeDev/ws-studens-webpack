@@ -3,11 +3,16 @@ import './playlistCarouselItem.scss';
 import $ from 'jquery';
 import { getInlineSvg } from '../../utils/getInlineSvg';
 
-export function playlistCarouselItem(playlist: Playlist) {
+/**
+ Элемент карусели
+ **/
+export function playlistCarouselItem(playlist: Playlist, index: number) {
     // jqery реализует что-то типо паттерна строитель, возвращая инстанс класса при каждом вызове метода. таким образом, мы можем вызывать методы "цепочкой"
     const descriptionElement = $('<div>').addClass('carousel-item__description')
-                                         .append($('<h3>').text(playlist.title)
-                                                          .addClass('carousel-item__description-title'))
+                                         .append($('<h3>')
+                                             .append(`<span class="carousel-item__description-index">${index + 1}</span>`)
+                                             .append(playlist.title)
+                                             .addClass('carousel-item__description-title'))
                                          .append($('<p>').text(playlist.description)
                                                          .addClass('carousel-item__description-annotation'));
 
@@ -26,7 +31,9 @@ export function playlistCarouselItem(playlist: Playlist) {
                                                      .append(controls));
 
     return $('<li>').addClass('carousel-item')
-        // добавление листенера
+        // можно добавлять свои атрибуты в, однако они должны иметь префикс `data`. В данном случае это может облегчить дебаг
+                    .attr('data-index', index)
+        // добавление лисенера
                     .on('click', () => window.open(playlist.link, '_blank'))
                     .append(coverWrapper)
                     .append(descriptionElement);
