@@ -2,12 +2,13 @@
 @import "src/styles/colors";
 @import "src/styles/fonts";
 @import "src/styles/variables";
+@import "../carouselVariables.module";
 
 .carousel-item {
   @include column-flex(10px);
-  width: 200px;
+  width: $carousel-item-width;
   height: auto;
-  padding: 10px;
+  padding: $carousel-items-side-padding;
   border-radius: 5px;
   transition: border-color $default-transition;
   box-sizing: content-box;
@@ -36,8 +37,8 @@
   }
 
   &__cover {
-    width: 200px;
-    height: 200px;
+    width: $carousel-item-width;
+    height: $carousel-item-width;
     border-radius: inherit;
   }
 

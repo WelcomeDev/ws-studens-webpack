@@ -1,0 +1,13 @@
+$gap-number: 20;
+$item-width-number: 200;
+$item-side-padding-number: 10;
+
+$carousel-item-width: #{$item-width-number}px;
+$carousel-items-gap: #{$gap-number}px;
+$carousel-items-side-padding: #{$item-side-padding-number}px;
+
+:export {
+  carouselItemWidth: $item-width-number;
+  carouselItemsGap: $gap-number;
+  carouselItemSidePadding: $item-side-padding-number;
+}

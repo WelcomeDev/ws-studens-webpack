@@ -1,4 +1,5 @@
 @import "src/styles/mixins";
+@import "../carouselVariables.module";
 
 .carousel {
   position: relative;
@@ -6,7 +7,7 @@
 
   &-list {
     position: relative;
-    @include center-row-flex(20px);
+    @include center-row-flex($carousel-items-gap);
     overflow-x: hidden;
     padding: 10px 20px;
   }
