@@ -7,14 +7,19 @@ import { getInlineSvg } from '../../utils/getInlineSvg';
  Элемент карусели
  **/
 export function playlistCarouselItem(playlist: Playlist, index: number) {
-    // jqery реализует что-то типо паттерна строитель, возвращая инстанс класса при каждом вызове метода. таким образом, мы можем вызывать методы "цепочкой"
-    const descriptionElement = $('<div>').addClass('carousel-item__description')
-                                         .append($('<h3>')
-                                             .append(`<span class="carousel-item__description-index">${index + 1}</span>`)
-                                             .append(playlist.title)
-                                             .addClass('carousel-item__description-title'))
-                                         .append($('<p>').text(playlist.description)
-                                                         .addClass('carousel-item__description-annotation'));
+
+    // можно бахнуть прям вот так, прям по жести элемент, с интерполяцией. И без всяких `innerHtml`
+    const descriptionElement = $(`
+        <div class="carousel-item__description">
+            <h3 class="carousel-item__description-title">
+                <span class="carousel-item__description-index">${index + 1}</span>
+                ${playlist.title}
+            </h3>
+            <p class="carousel-item__description-annotation">
+                ${playlist.description}
+             </p>
+        </div>
+    `);
 
     const imageElement = $('<img>').addClass(['carousel-item__cover', 'image', 'loading']);
     import(`/src/assets/${playlist.imgSrc}`)
@@ -24,19 +29,19 @@ export function playlistCarouselItem(playlist: Playlist, index: number) {
         });
 
     const controls = getControls();
-    const coverWrapper = $('<div>').addClass('carousel-item__cover-wrapper')
-                                   .append($('<div class="carousel-item__cover-shadow">'))
-                                   .append(imageElement)
-                                   .append($('<div>').addClass('carousel-item__cover-controls')
-                                                     .append(controls));
+    const coverWrapper = $('<div class="carousel-item__cover-wrapper">')
+        .append($('<div class="carousel-item__cover-shadow">'))
+        .append(imageElement)
+        .append($('<div class="carousel-item__cover-controls">')
+            .append(controls));
 
-    return $('<li>').addClass('carousel-item')
-        // можно добавлять свои атрибуты в, однако они должны иметь префикс `data`. В данном случае это может облегчить дебаг
-                    .attr('data-index', index)
-        // добавление лисенера
-                    .on('click', () => window.open(playlist.link, '_blank'))
-                    .append(coverWrapper)
-                    .append(descriptionElement);
+    // jqery реализует что-то типо паттерна строитель, возвращая инстанс класса при каждом вызове метода. таким образом, мы можем вызывать методы "цепочкой"
+    // можно добавлять свои атрибуты в, однако они должны иметь префикс `data`. В данном случае это может облегчить дебаг
+    return $(`<li class="carousel-item" data-index="${index}">`)
+        // добавление листенера
+        .on('click', () => window.open(playlist.link, '_blank'))
+        .append(coverWrapper)
+        .append(descriptionElement);
 }
 
 function getControls() {

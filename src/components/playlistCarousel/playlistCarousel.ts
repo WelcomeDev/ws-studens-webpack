@@ -28,7 +28,6 @@ export function playlistCarousel(items: Playlist[]) {
     /**
      * Работаем в кольце. Индекс принадлежит, если меньше остатка или если больше сдвига
      * На первый аргумент все равно, важен только индекс
-     * @param value
      */
     function isInForwardRing(_: any, index: number) {
         const shiftAbs = Math.abs(carouselShift);
@@ -72,8 +71,9 @@ export function playlistCarousel(items: Playlist[]) {
 
     function turn(direction: 'left' | 'right') {
         const directionSign = direction === 'left' ? 1 : -1;
+        const shiftSign = carouselShift < 0 ? -1 : 1;
         const forwardShift = setCarouselShift(carouselShift - directionSign) * shiftSize;
-        const backwardsShift = directionSign * shiftSize * (items.length + directionSign * carouselShift);
+        const backwardsShift = -shiftSign * shiftSize * (items.length + -shiftSign * carouselShift);
 
         playlistItems.filter(isInForwardRing)
                      .forEach(playlist => playlist.css(translateX(forwardShift)));

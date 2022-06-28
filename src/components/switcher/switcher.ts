@@ -1,5 +1,6 @@
 import './switcher.scss';
 import { getInlineSvg } from '../../utils/getInlineSvg';
+import $ from 'jquery';
 
 export interface SwitcherProps {
     // агаааа, константы - тоже тип в JS, поэтому можно быстро создавать такие "типо-енумы". Для чего-то глобального не стоит это использовать
@@ -15,18 +16,29 @@ export interface SwitcherProps {
 export function switcher(props: SwitcherProps) {
     const { direction, onClick } = props;
 
-    const switcherElement = document.createElement('button');
-    switcherElement.setAttribute('type', 'button');
-    switcherElement.setAttribute('title', direction === 'left' ? 'Go left' : 'Go Right');
-    switcherElement.classList.add('switcher');
-    switcherElement.classList.add(`switcher--${direction}`);
-    switcherElement.addEventListener('click', onClick);
+    // const switcherElement = document.createElement('button');
+    // switcherElement.setAttribute('type', 'button');
+    // switcherElement.setAttribute('title', direction === 'left' ? 'Go left' : 'Go Right');
+    // switcherElement.classList.add('switcher');
+    // switcherElement.classList.add(`switcher--${direction}`);
+    // switcherElement.addEventListener('click', onClick);
+    //
+    // getInlineSvg('chevron-up.svg')
+    //     .then(inlineSvg => {
+    //         inlineSvg.classList.add('switcher__chevron');
+    //         switcherElement.appendChild(inlineSvg);
+    //     });
+    // or
+    const switcherElement = $(`<button type="button"
+                                        title="${direction === 'left' ? 'Go left' : 'Go Right'}">`)
+        .addClass(['switcher', `switcher--${direction}`])
+        .on('click', onClick);
 
     getInlineSvg('chevron-up.svg')
         .then(inlineSvg => {
             inlineSvg.classList.add('switcher__chevron');
-            switcherElement.appendChild(inlineSvg);
+            switcherElement.append(inlineSvg);
         });
 
-    return switcherElement;
+    return switcherElement[0];
 }
