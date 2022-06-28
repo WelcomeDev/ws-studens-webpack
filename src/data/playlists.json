@@ -6,6 +6,12 @@
     "link": "https://music.yandex.ru/artist/701626"
   },
   {
+    "title": "Shinedown",
+    "description": "alternative metal",
+    "imgSrc": "shinedown.png",
+    "link": "https://music.yandex.ru/artist/44137"
+  },
+  {
     "title": "Dance with the dead",
     "description": "electronic, dance",
     "imgSrc": "dance_with_the_dead.png",

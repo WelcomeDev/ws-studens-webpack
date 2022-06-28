@@ -72,6 +72,7 @@ export function useShift(playlistItems: JQuery[], shiftSize: number, displayedAm
         turn('right');
     }
 
+    // создаем объект, который позволяет получить доступ к нужным данным внутри этой функции
     return {
         turnLeft,
         turnRight,

@@ -21,7 +21,7 @@ export function playlistCarouselItem(playlist: Playlist, index: number) {
         </div>
     `);
 
-    const imageElement = $('<img>').addClass(['carousel-item__cover', 'image', 'loading']);
+    const imageElement = $(`<img>`).addClass(['carousel-item__cover', 'image', 'loading']);
     import(`/src/assets/${playlist.imgSrc}`)
         .then((imgSrc) => {
             imageElement.removeClass('loading');

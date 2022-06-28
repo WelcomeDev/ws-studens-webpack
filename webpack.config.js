@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MinifyCssPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path');
 
+// ваще-то урок у нас был по вебпаку. Так что в следующем пр будет настройка для прод
+// докину фокусов и оптимизации, минификации и изуродования 🌚
 module.exports = {
     mode: 'development',
     entry: {
