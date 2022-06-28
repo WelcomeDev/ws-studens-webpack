@@ -3,9 +3,9 @@ import { getInlineSvg } from '../../utils/getInlineSvg';
 import $ from 'jquery';
 
 export interface SwitcherProps {
-    // агаааа, константы - тоже тип в JS, поэтому можно быстро создавать такие "типо-енумы". Для чего-то глобального не стоит это использовать
+    // константы - тоже тип в JS, поэтому можно быстро создавать такие "типо-енумы". Для чего-то глобального не стоит это использовать
     direction: 'left' | 'right';
-    // можно еще просто onClick()
+    // можно еще просто onClick():void;
     onClick: () => void;
 }
 
@@ -16,6 +16,8 @@ export interface SwitcherProps {
 export function switcher(props: SwitcherProps) {
     const { direction, onClick } = props;
 
+    // садомия и боль на JS
+    //
     // const switcherElement = document.createElement('button');
     // switcherElement.setAttribute('type', 'button');
     // switcherElement.setAttribute('title', direction === 'left' ? 'Go left' : 'Go Right');
@@ -28,6 +30,7 @@ export function switcher(props: SwitcherProps) {
     //         inlineSvg.classList.add('switcher__chevron');
     //         switcherElement.appendChild(inlineSvg);
     //     });
+    // return switcherElement[];
     // or
     const switcherElement = $(`<button type="button"
                                         title="${direction === 'left' ? 'Go left' : 'Go Right'}">`)
@@ -40,5 +43,5 @@ export function switcher(props: SwitcherProps) {
             switcherElement.append(inlineSvg);
         });
 
-    return switcherElement[0];
+    return switcherElement;
 }

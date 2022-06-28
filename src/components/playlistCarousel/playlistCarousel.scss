@@ -12,10 +12,15 @@
     padding: 10px 20px;
   }
 
+  // switcher не должен знать о своих размерах => переиспользуемость
+  // также он ничего не знает о своем положении
   &__control {
+    $switcher-size: 40px;
     position: absolute;
-    top: calc(50% - 20px);
+    top: calc(50% - #{$switcher-size} / 2);
     $outside-shift: -30px;
+    width: $switcher-size;
+    height: $switcher-size;
 
     &--left {
       left: $outside-shift;
