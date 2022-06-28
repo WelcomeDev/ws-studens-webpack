@@ -1,0 +1,33 @@
+@import "src/styles/mixins";
+@import "../carouselVariables.module";
+
+.carousel {
+  position: relative;
+  max-width: inherit;
+
+  &-list {
+    position: relative;
+    @include center-row-flex($carousel-items-gap);
+    overflow-x: hidden;
+    padding: 10px 20px;
+  }
+
+  // switcher не должен знать о своих размерах => переиспользуемость
+  // также он ничего не знает о своем положении
+  &__control {
+    $switcher-size: 40px;
+    position: absolute;
+    top: calc(50% - #{$switcher-size} / 2);
+    $outside-shift: -30px;
+    width: $switcher-size;
+    height: $switcher-size;
+
+    &--left {
+      left: $outside-shift;
+    }
+
+    &--right {
+      right: $outside-shift;
+    }
+  }
+}

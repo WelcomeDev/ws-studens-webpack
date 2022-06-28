@@ -1,0 +1,46 @@
+@import "src/styles/colors";
+@import "src/styles/variables";
+@import "src/styles/mixins";
+
+.switcher {
+  @include center-row-flex();
+  justify-content: center;
+
+  border-radius: 50%;
+  background-color: $bg-2;
+  border: 1px solid $separator-1;
+  box-shadow: $default-box-shadow;
+  transition: transform $default-transition;
+
+  &__chevron {
+    width: 24px;
+    height: 24px;
+    stroke: $separator-2;
+    opacity: 0.8;
+  }
+
+  &:hover:not(:active) {
+    transform: $default-scale;
+
+    .switcher__chevron {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transition: transform $fast-transition;
+    transform: $small-scale;
+  }
+
+  &--left {
+    .switcher__chevron {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &--right {
+    .switcher__chevron {
+      transform: rotate(90deg);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import "styles/colors";
+@import "styles/variables";
+@import "styles/mixins";
+
+body {
+  background-color: $bg-1;
+  color: $text-1;
+}
+
+.app-wrapper {
+  @include center-row-flex();
+  width: 100%;
+  height: 100%;
+
+  max-width: #{$laptop-carousel-width}px;
+  margin: 0 auto;
+}
