@@ -46,6 +46,7 @@ export function playlistCarouselItem(playlist: Playlist, index: number) {
 
 function getControls() {
     function createControl(svgName: string, type: 'side' | 'play') {
+        // все методы инициализации можно вызывать в таким Builder-стиле (кто не шарит за паттерн Builder - марш в гугл)
         const control = $('<button>').addClass(['cover-control', `cover-control--${type}`])
             // ух, семантика так и прет
                                      .on('click', (e) => e.stopPropagation())

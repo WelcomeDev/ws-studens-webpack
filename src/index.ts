@@ -10,5 +10,6 @@ window.addEventListener('load', () => {
                                 .item(0);
     if (!mainElement) return;
 
-    mainElement.appendChild(playlistCarousel(playlists));
+    // возвращаем htmlElement, что делается вот таким интересным способом `[0]`
+    mainElement.appendChild(playlistCarousel(playlists)[0]);
 });

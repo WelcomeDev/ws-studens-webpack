@@ -5,8 +5,9 @@ import $ from 'jquery';
 export interface SwitcherProps {
     // константы - тоже тип в JS, поэтому можно быстро создавать такие "типо-енумы". Для чего-то глобального не стоит это использовать
     direction: 'left' | 'right';
-    // можно еще просто onClick():void;
+    // можно еще просто onClick():void; преимущество такого подхода, что можно обозначить параметр необязательным
     onClick: () => void;
+    class?: string[] | string;
 }
 
 /**
@@ -31,10 +32,12 @@ export function switcher(props: SwitcherProps) {
     //         switcherElement.appendChild(inlineSvg);
     //     });
     // return switcherElement[];
+    //
     // or
     const switcherElement = $(`<button type="button"
                                         title="${direction === 'left' ? 'Go left' : 'Go Right'}">`)
-        .addClass(['switcher', `switcher--${direction}`])
+        // иначе TS ругается, что undefined нельзя итерировать
+        .addClass(['switcher', `switcher--${direction}`, ...props.class ?? ''])
         .on('click', onClick);
 
     getInlineSvg('chevron-up.svg')
